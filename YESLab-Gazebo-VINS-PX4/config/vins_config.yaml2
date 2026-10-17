@@ -1,0 +1,43 @@
+%YAML:1.0
+---
+imu: 1
+num_of_cam: 1
+imu_topic: "/mavros/imu/data"          # ← 唯一差异
+image0_topic: "/camera/image_raw"      # ← 唯一差异
+output_path: "/tmp/vins_output/"
+cam0_calib: "cam0_pinhole.yaml"
+image_width: 640
+image_height: 480
+
+body_T_cam0: !!opencv-matrix
+   rows: 4
+   cols: 4
+   dt: f
+   data: [0.0, 0.0, 1.0, 0.12,          # ← 相机安装在机体前方 0.12 m
+          -1.0, 0.0, 0.0, 0.0,
+          0.0, -1.0, 0.0, -0.04,         # ← 相机低于机体中心 0.04 m
+          0.0, 0.0, 0.0, 1.0]
+
+multiple_thread: 1
+gps_available: 0
+max_solver_time: 0.04
+max_num_iterations: 8
+keyframe_parallax: 10.0
+acc_n: 0.04
+gyr_n: 0.004
+acc_w: 0.0004
+gyr_w: 0.00002
+g_norm: 9.81007
+estimate_td: 0
+td: 0.0
+estimate_extrinsic: 0
+use_imu: 1
+use_pose: 0
+max_cnt: 150
+min_dist: 20
+freq: 0
+F_threshold: 1.0
+show_track: 0
+pub_tf: 1
+publish_pose: 1
+pose_graph: 0
